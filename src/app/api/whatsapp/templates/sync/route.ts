@@ -4,6 +4,8 @@ import { decrypt } from '@/lib/whatsapp/encryption'
 import { normalizeStatus } from '@/lib/whatsapp/template-status-normalize'
 import type { TemplateButton, TemplateSampleValues } from '@/types'
 
+export const maxDuration = 60
+
 /**
  * Sync message templates from Meta → local message_templates table.
  *
@@ -199,7 +201,7 @@ export async function POST() {
         } catch {
           // response wasn't JSON — keep the fallback
         }
-        return NextResponse.json({ error: metaErr }, { status: 502 })
+        return NextResponse.json({ error: metaErr }, { status: 500 })
       }
 
       const metaBody: {

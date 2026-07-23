@@ -321,7 +321,7 @@ export function Step3Personalize({
                     </label>
                     <Select
                       value={mapping.type}
-                      onValueChange={(val: string) =>
+                      onValueChange={(val: any) =>
                         updateVariable(key, {
                           type: val as VariableType,
                           value: '',
@@ -357,7 +357,7 @@ export function Step3Personalize({
                     ) : mapping.type === 'field' ? (
                       <Select
                         value={mapping.value || undefined}
-                        onValueChange={(val: string) =>
+                        onValueChange={(val: any) =>
                           updateVariable(key, { value: val || '' })
                         }
                       >
@@ -375,7 +375,7 @@ export function Step3Personalize({
                     ) : (
                       <Select
                         value={mapping.value || undefined}
-                        onValueChange={(val: string) =>
+                        onValueChange={(val: any) =>
                           updateVariable(key, { value: val || '' })
                         }
                       >

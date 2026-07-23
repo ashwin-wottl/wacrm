@@ -275,7 +275,7 @@ function TriggerPanel({
           </label>
           <Select
             value={state.trigger_type}
-            onValueChange={(v: string) =>
+            onValueChange={(v: any) =>
               setState((s) => ({
                 ...s,
                 trigger_type: v as BuilderState['trigger_type'],

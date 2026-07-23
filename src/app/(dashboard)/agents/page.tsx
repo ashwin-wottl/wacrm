@@ -47,7 +47,7 @@ export default function AgentsPage() {
       {decided && (
         <Tabs
           value={tab}
-          onValueChange={(v: string) => setTab(v as Tab)}
+          onValueChange={(v: any) => setTab(v as Tab)}
           className="mt-6"
         >
           <TabsList>

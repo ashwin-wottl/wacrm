@@ -43,6 +43,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ComponentProps<typeof ButtonPrimitive>,
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof React.ComponentProps<typeof ButtonPrimitive>>,
     VariantProps<typeof buttonVariants> {
   className?: string
   children?: React.ReactNode
@@ -57,6 +58,7 @@ function Button({
   return (
     <ButtonPrimitive
       data-slot="button"
+      // @ts-expect-error Base UI typing does not include className explicitly
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />

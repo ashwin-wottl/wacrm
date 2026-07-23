@@ -1,35 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { ThemedToaster } from "@/components/themed-toaster";
 import {
   DEFAULT_MODE,
-  DEFAULT_THEME,
   MODE_STORAGE_KEY,
   MODES,
-  STORAGE_KEY,
-  THEME_IDS,
+  CUSTOM_COLOR_STORAGE_KEY,
+  DEFAULT_CUSTOM_COLOR,
 } from "@/lib/themes";
 
-const inter = Inter({
+const outfit = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "wacrm",
-    template: "%s — wacrm",
+    default: "WOTTL | WhatsApp CRM",
+    template: "%s — WOTTL | WhatsApp CRM",
   },
-  description: "Self-hostable CRM template for WhatsApp.",
+  description: "Best WhatsApp CRM for managing your business conversations.",
   robots: {
     index: false,
     follow: false,
   },
   icons: {
-    icon: [{ url: "/icon" }],
+    icon: "/icon.png",
   },
   formatDetection: {
     email: false,
@@ -57,11 +56,32 @@ const THEME_BOOT_SCRIPT = `
 (function(){
   var d = document.documentElement;
   try {
-    var THEME_KEY = ${JSON.stringify(STORAGE_KEY)};
-    var THEME_DEFAULT = ${JSON.stringify(DEFAULT_THEME)};
-    var THEMES = ${JSON.stringify(THEME_IDS)};
-    var savedTheme = localStorage.getItem(THEME_KEY);
-    d.dataset.theme = THEMES.indexOf(savedTheme) !== -1 ? savedTheme : THEME_DEFAULT;
+    var CUSTOM_KEY = ${JSON.stringify(CUSTOM_COLOR_STORAGE_KEY)};
+    var DEFAULT_COLOR = ${JSON.stringify(DEFAULT_CUSTOM_COLOR)};
+    var savedColor = localStorage.getItem(CUSTOM_KEY);
+    var hex = (savedColor && /^#[0-9A-F]{6}$/i.test(savedColor)) ? savedColor : DEFAULT_COLOR;
+    
+    // YIQ contrast
+    var cleanHex = hex.replace("#", "");
+    var r = parseInt(cleanHex.substring(0, 2), 16);
+    var g = parseInt(cleanHex.substring(2, 4), 16);
+    var b = parseInt(cleanHex.substring(4, 6), 16);
+    var yiq = (r * 299 + g * 587 + b * 114) / 1000;
+    var foreground = yiq >= 128 ? "#000000" : "#ffffff";
+    
+    var soft = hex + "1f";
+    var soft2 = hex + "38";
+    
+    d.style.setProperty("--primary", hex);
+    d.style.setProperty("--primary-foreground", foreground);
+    d.style.setProperty("--primary-hover", "color-mix(in srgb, " + hex + ", black 15%)");
+    d.style.setProperty("--primary-soft", soft);
+    d.style.setProperty("--primary-soft-2", soft2);
+    d.style.setProperty("--ring", hex);
+    d.style.setProperty("--chart-1", hex);
+    d.style.setProperty("--sidebar-primary", hex);
+    d.style.setProperty("--sidebar-primary-foreground", foreground);
+    d.style.setProperty("--sidebar-ring", hex);
 
     var MODE_KEY = ${JSON.stringify(MODE_STORAGE_KEY)};
     var MODE_DEFAULT = ${JSON.stringify(DEFAULT_MODE)};
@@ -69,7 +89,6 @@ const THEME_BOOT_SCRIPT = `
     var savedMode = localStorage.getItem(MODE_KEY);
     d.dataset.mode = MODES.indexOf(savedMode) !== -1 ? savedMode : MODE_DEFAULT;
   } catch (_e) {
-    d.dataset.theme = ${JSON.stringify(DEFAULT_THEME)};
     d.dataset.mode = ${JSON.stringify(DEFAULT_MODE)};
   }
 })();
@@ -83,9 +102,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme={DEFAULT_THEME}
       data-mode={DEFAULT_MODE}
-      className={`${inter.variable} h-full antialiased`}
+      className={`${outfit.variable} h-full antialiased`}
       // The `theme-boot` script below rewrites `data-theme` and
       // `data-mode` on <html> from localStorage before React hydrates,
       // so for any non-default choice the client DOM intentionally

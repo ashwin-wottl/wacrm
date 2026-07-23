@@ -41,7 +41,7 @@ function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
 function AvatarFallback({
   className,
   ...props
-}: AvatarPrimitive.Fallback.Props) {
+}: AvatarPrimitive.Fallback.Props & { className?: string; children?: React.ReactNode }) {
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"

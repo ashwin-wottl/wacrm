@@ -11,35 +11,52 @@ import {
 
 import {
   DEFAULT_MODE,
-  DEFAULT_THEME,
   MODE_STORAGE_KEY,
-  STORAGE_KEY,
+  CUSTOM_COLOR_STORAGE_KEY,
+  DEFAULT_CUSTOM_COLOR,
   isMode,
-  isThemeId,
   type Mode,
-  type ThemeId,
 } from "@/lib/themes";
 
-/**
- * ThemeProvider — wraps the whole app, owns the two theming axes:
- *   • `theme` — the accent color (`data-theme` on <html>)
- *   • `mode`  — light / dark (`data-mode` on <html>)
- * The two are independent, so any accent renders in either mode.
- *
- * The boot script in `src/app/layout.tsx` has already applied both
- * `data-theme` and `data-mode` before React hydrates, so by the time
- * this Provider mounts the page is already painted correctly. We just
- * read what's there and keep it in sync going forward.
- *
- * Persistence is localStorage only (device-scoped). A future
- * follow-up could mirror to `profiles.preferences` for cross-device
- * sync, but a per-device choice is also defensible — your phone may
- * deserve a different theme than your laptop.
- */
+export function getContrastYIQ(hexcolor: string) {
+  // Remove the hash if it exists
+  const hex = hexcolor.replace("#", "");
+  if (hex.length !== 6) return "#ffffff";
+  
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq >= 128 ? "#000000" : "#ffffff";
+}
+
+export function applyCustomColor(hex: string) {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  const foreground = getContrastYIQ(hex);
+  
+  // Opacity approximations in hex
+  // 12% = 1F, 22% = 38
+  const soft = `${hex}1f`;
+  const soft2 = `${hex}38`;
+  
+  root.style.setProperty("--primary", hex);
+  root.style.setProperty("--primary-foreground", foreground);
+  // for hover, we can just use the hex itself or a slight opacity, tailwind v4 handles hover well if we just let it be, but let's provide a slightly darker shade if we could, or just rely on color-mix. We'll use color-mix for hover.
+  root.style.setProperty("--primary-hover", `color-mix(in srgb, ${hex}, black 15%)`);
+  root.style.setProperty("--primary-soft", soft);
+  root.style.setProperty("--primary-soft-2", soft2);
+  root.style.setProperty("--ring", hex);
+  root.style.setProperty("--chart-1", hex);
+  root.style.setProperty("--sidebar-primary", hex);
+  root.style.setProperty("--sidebar-primary-foreground", foreground);
+  root.style.setProperty("--sidebar-ring", hex);
+}
 
 interface ThemeContextValue {
-  theme: ThemeId;
-  setTheme: (next: ThemeId) => void;
+  customColor: string;
+  setCustomColor: (next: string) => void;
   mode: Mode;
   setMode: (next: Mode) => void;
   toggleMode: () => void;
@@ -47,20 +64,13 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function readInitialTheme(): ThemeId {
-  if (typeof window === "undefined") return DEFAULT_THEME;
-  // Whatever the boot script applied is the truth. Fall back to
-  // localStorage / default if for some reason the attribute is missing
-  // (e.g. someone bypassed the boot script in a custom layout).
-  const fromAttr = document.documentElement.dataset.theme;
-  if (isThemeId(fromAttr)) return fromAttr;
+function readInitialCustomColor(): string {
+  if (typeof window === "undefined") return DEFAULT_CUSTOM_COLOR;
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (isThemeId(stored)) return stored;
-  } catch {
-    // localStorage can throw in private-browsing / sandboxed contexts.
-  }
-  return DEFAULT_THEME;
+    const stored = localStorage.getItem(CUSTOM_COLOR_STORAGE_KEY);
+    if (stored && /^#[0-9A-F]{6}$/i.test(stored)) return stored;
+  } catch {}
+  return DEFAULT_CUSTOM_COLOR;
 }
 
 function readInitialMode(): Mode {
@@ -70,27 +80,20 @@ function readInitialMode(): Mode {
   try {
     const stored = localStorage.getItem(MODE_STORAGE_KEY);
     if (isMode(stored)) return stored;
-  } catch {
-    // localStorage can throw in private-browsing / sandboxed contexts.
-  }
+  } catch {}
   return DEFAULT_MODE;
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeId>(readInitialTheme);
+  const [customColor, setCustomColorState] = useState<string>(readInitialCustomColor);
   const [mode, setModeState] = useState<Mode>(readInitialMode);
 
-  const setTheme = useCallback((next: ThemeId) => {
-    setThemeState(next);
-    if (typeof document !== "undefined") {
-      document.documentElement.dataset.theme = next;
-    }
+  const setCustomColor = useCallback((next: string) => {
+    setCustomColorState(next);
+    applyCustomColor(next);
     try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // Same private-browsing edge case as above; the in-memory state
-      // still updates so the current tab works for the session.
-    }
+      localStorage.setItem(CUSTOM_COLOR_STORAGE_KEY, next);
+    } catch {}
   }, []);
 
   const setMode = useCallback((next: Mode) => {
@@ -100,23 +103,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
     try {
       localStorage.setItem(MODE_STORAGE_KEY, next);
-    } catch {
-      // Same private-browsing edge case as above.
-    }
+    } catch {}
   }, []);
 
   const toggleMode = useCallback(() => {
     setMode(mode === "dark" ? "light" : "dark");
   }, [mode, setMode]);
 
-  // Sync from other tabs — change theme or mode in tab A, tab B
-  // catches up without a refresh.
   useEffect(() => {
     function onStorage(e: StorageEvent) {
-      if (e.key === STORAGE_KEY) {
-        if (isThemeId(e.newValue) && e.newValue !== theme) {
-          setThemeState(e.newValue);
-          document.documentElement.dataset.theme = e.newValue;
+      if (e.key === CUSTOM_COLOR_STORAGE_KEY) {
+        if (e.newValue && /^#[0-9A-F]{6}$/i.test(e.newValue) && e.newValue !== customColor) {
+          setCustomColorState(e.newValue);
+          applyCustomColor(e.newValue);
         }
         return;
       }
@@ -129,10 +128,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
-  }, [theme, mode]);
+  }, [customColor, mode]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, mode, setMode, toggleMode }}>
+    <ThemeContext.Provider value={{ customColor, setCustomColor, mode, setMode, toggleMode }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -141,12 +140,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
-    // Fallback for components rendered outside the provider — return
-    // no-op setters so callers don't crash. The boot script still
-    // applied the right CSS attributes, so visually the page is fine.
     return {
-      theme: DEFAULT_THEME,
-      setTheme: () => {},
+      customColor: DEFAULT_CUSTOM_COLOR,
+      setCustomColor: () => {},
       mode: DEFAULT_MODE,
       setMode: () => {},
       toggleMode: () => {},

@@ -13,19 +13,8 @@
  *   2. Add an entry below. The order here drives the picker grid.
  */
 
-export const THEME_IDS = [
-  "violet",
-  "emerald",
-  "cobalt",
-  "amber",
-  "rose",
-] as const;
-
-export type ThemeId = (typeof THEME_IDS)[number];
-
-export const DEFAULT_THEME: ThemeId = "violet";
-
-export const STORAGE_KEY = "wacrm.theme";
+export const CUSTOM_COLOR_STORAGE_KEY = "wacrm.customColor";
+export const DEFAULT_CUSTOM_COLOR = "#10b981";
 
 /**
  * MODE — the light/dark dimension, orthogonal to the accent theme.

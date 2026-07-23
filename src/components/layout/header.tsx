@@ -19,7 +19,7 @@ import {
 import { ModeToggle } from "@/components/layout/mode-toggle";
 
 const pageTitles: Record<string, string> = {
-  "/dashboard": "Dashboard",
+  "/dashboard": "WOTTL WHATSAPP CRM",
   "/inbox": "Inbox",
   "/notifications": "Notifications",
   "/contacts": "Contacts",
@@ -54,8 +54,8 @@ export function Header({ onOpenSidebar }: HeaderProps) {
     "U";
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-background px-4 lg:px-6">
-      <div className="flex min-w-0 items-center gap-2">
+    <header className="relative flex h-14 shrink-0 items-center justify-between border-b border-border bg-background px-4 lg:px-6">
+      <div className="flex items-center gap-2 z-10">
         {/* Hamburger — mobile only. 44×44 hit target per Apple HIG. */}
         <button
           type="button"
@@ -65,12 +65,15 @@ export function Header({ onOpenSidebar }: HeaderProps) {
         >
           <Menu className="h-5 w-5" />
         </button>
-        <h1 className="truncate text-base font-semibold text-foreground sm:text-lg">
+      </div>
+
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-16">
+        <h1 className="truncate text-base font-semibold text-foreground sm:text-lg text-center">
           {title}
         </h1>
       </div>
 
-      <div className="flex items-center gap-1 sm:gap-2">
+      <div className="flex items-center gap-1 sm:gap-2 z-10">
         <ModeToggle />
 
         <DropdownMenu>

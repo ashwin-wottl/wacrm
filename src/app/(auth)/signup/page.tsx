@@ -165,7 +165,7 @@ function SignupPageInner() {
                 type="text"
                 placeholder="John Doe"
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e: any) => setFullName(e.target.value)}
                 required
                 className="border-border bg-muted text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/20"
               />
@@ -180,7 +180,7 @@ function SignupPageInner() {
                 type="email"
                 placeholder="you@example.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: any) => setEmail(e.target.value)}
                 required
                 className="border-border bg-muted text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/20"
               />
@@ -195,7 +195,7 @@ function SignupPageInner() {
                 type="password"
                 placeholder="At least 6 characters"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: any) => setPassword(e.target.value)}
                 required
                 className="border-border bg-muted text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/20"
               />
@@ -210,7 +210,7 @@ function SignupPageInner() {
                 type="password"
                 placeholder="Repeat your password"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e: any) => setConfirmPassword(e.target.value)}
                 required
                 className="border-border bg-muted text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/20"
               />

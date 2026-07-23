@@ -433,7 +433,7 @@ export function ImportModal({
             role="button"
             tabIndex={0}
             onClick={() => fileInputRef.current?.click()}
-            onKeyDown={(e) => {
+            onKeyDown={(e: any) => {
               if (e.key === 'Enter' || e.key === ' ')
                 fileInputRef.current?.click();
             }}

@@ -267,7 +267,7 @@ export function ProfileForm() {
             <Input
               id="profile-full-name"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e: any) => setFullName(e.target.value)}
               placeholder="Ada Lovelace"
               maxLength={120}
               disabled={saving}
@@ -284,7 +284,7 @@ export function ProfileForm() {
               id="profile-email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: any) => setEmail(e.target.value)}
               disabled={saving}
               required
             />

@@ -103,7 +103,7 @@ export function PasswordForm() {
               id="current-password"
               type="password"
               value={current}
-              onChange={(e) => setCurrent(e.target.value)}
+              onChange={(e: any) => setCurrent(e.target.value)}
               autoComplete="current-password"
               disabled={saving}
               required
@@ -119,7 +119,7 @@ export function PasswordForm() {
                 id="new-password"
                 type="password"
                 value={next}
-                onChange={(e) => setNext(e.target.value)}
+                onChange={(e: any) => setNext(e.target.value)}
                 autoComplete="new-password"
                 minLength={MIN_PASSWORD}
                 disabled={saving}
@@ -134,7 +134,7 @@ export function PasswordForm() {
                 id="confirm-password"
                 type="password"
                 value={confirm}
-                onChange={(e) => setConfirm(e.target.value)}
+                onChange={(e: any) => setConfirm(e.target.value)}
                 autoComplete="new-password"
                 minLength={MIN_PASSWORD}
                 disabled={saving}

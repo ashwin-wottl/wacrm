@@ -96,7 +96,7 @@ export function AppearancePanel() {
                 id="native-color-picker"
                 type="color"
                 value={customColor}
-                onChange={(e) => setCustomColor(e.target.value)}
+                onChange={(e: any) => setCustomColor(e.target.value)}
                 className="absolute opacity-0 h-0 w-0"
               />
             </label>
@@ -116,7 +116,7 @@ export function AppearancePanel() {
               min="0"
               max="360"
               value={currentHue}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 const newHue = Number(e.target.value);
                 // If the color was totally grayscale (saturation 0 or extreme lightness),
                 // bump it up slightly so the hue slider actually does something visible.
@@ -147,7 +147,7 @@ export function AppearancePanel() {
                     <div
                       role="button"
                       tabIndex={0}
-                      onClick={(e) => removeColor(e, hex)}
+                      onClick={(e: any) => removeColor(e, hex)}
                       className="absolute -top-1 -right-1 hidden h-4 w-4 items-center justify-center rounded-full bg-destructive text-destructive-foreground opacity-0 transition-opacity group-hover:flex group-hover:opacity-100"
                     >
                       <X className="size-2.5" />

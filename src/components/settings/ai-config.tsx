@@ -252,7 +252,7 @@ export function AiConfig() {
                 <Label>Provider</Label>
                 <Select
                   value={provider}
-                  onValueChange={(v) => handleProviderChange(v as AiProvider)}
+                  onValueChange={(v: any) => handleProviderChange(v as AiProvider)}
                   disabled={disabled}
                 >
                   <SelectTrigger>
@@ -272,7 +272,7 @@ export function AiConfig() {
                 <Input
                   id="ai-model"
                   value={model}
-                  onChange={(e) => setModel(e.target.value)}
+                  onChange={(e: any) => setModel(e.target.value)}
                   placeholder={AI_PROVIDER_DEFAULT_MODEL[provider]}
                   disabled={disabled}
                 />
@@ -287,7 +287,7 @@ export function AiConfig() {
                     id="ai-key"
                     type={showKey ? 'text' : 'password'}
                     value={apiKey}
-                    onChange={(e) => {
+                    onChange={(e: any) => {
                       setApiKey(e.target.value);
                       setKeyEdited(true);
                     }}
@@ -340,7 +340,7 @@ export function AiConfig() {
                 id="ai-embeddings-key"
                 type="password"
                 value={embeddingsKey}
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setEmbeddingsKey(e.target.value);
                   setEmbeddingsKeyEdited(true);
                 }}
@@ -380,7 +380,7 @@ export function AiConfig() {
               <Textarea
                 id="ai-prompt"
                 value={systemPrompt}
-                onChange={(e) => setSystemPrompt(e.target.value)}
+                onChange={(e: any) => setSystemPrompt(e.target.value)}
                 placeholder="e.g. We are Acme, a coffee-equipment store. Be warm and concise. Never quote prices or delivery dates — hand off to a human for those."
                 rows={5}
                 disabled={disabled}
@@ -435,7 +435,7 @@ export function AiConfig() {
                 min={1}
                 max={20}
                 value={maxPerConversation}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   setMaxPerConversation(
                     Math.min(20, Math.max(1, Number(e.target.value) || 1)),
                   )

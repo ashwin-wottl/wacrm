@@ -571,7 +571,7 @@ export function WhatsAppConfig() {
               <Input
                 placeholder="e.g. 100234567890123"
                 value={phoneNumberId}
-                onChange={(e) => setPhoneNumberId(e.target.value)}
+                onChange={(e: any) => setPhoneNumberId(e.target.value)}
                 className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
               />
             </div>
@@ -581,7 +581,7 @@ export function WhatsAppConfig() {
               <Input
                 placeholder="e.g. 100234567890456"
                 value={wabaId}
-                onChange={(e) => setWabaId(e.target.value)}
+                onChange={(e: any) => setWabaId(e.target.value)}
                 className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
               />
             </div>
@@ -593,7 +593,7 @@ export function WhatsAppConfig() {
                   type={showToken ? 'text' : 'password'}
                   placeholder="Enter your access token"
                   value={accessToken}
-                  onChange={(e) => {
+                  onChange={(e: any) => {
                     setAccessToken(e.target.value);
                     setTokenEdited(true);
                   }}
@@ -625,7 +625,7 @@ export function WhatsAppConfig() {
               <Input
                 placeholder="Create a custom verify token"
                 value={verifyToken}
-                onChange={(e) => setVerifyToken(e.target.value)}
+                onChange={(e: any) => setVerifyToken(e.target.value)}
                 className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
               />
               <p className="text-xs text-muted-foreground">
@@ -644,7 +644,7 @@ export function WhatsAppConfig() {
                 maxLength={6}
                 placeholder="6-digit PIN from Meta WhatsApp Manager"
                 value={pin}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   setPin(e.target.value.replace(/\D/g, '').slice(0, 6))
                 }
                 className="bg-muted border-border text-foreground placeholder:text-muted-foreground tracking-widest"

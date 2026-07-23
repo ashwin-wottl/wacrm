@@ -261,7 +261,7 @@ export function DealForm({
               <Label className="text-muted-foreground">Title</Label>
               <Input
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e: any) => setTitle(e.target.value)}
                 placeholder="Deal title"
                 className="border-border bg-muted text-foreground"
               />
@@ -271,7 +271,7 @@ export function DealForm({
               <Label className="text-muted-foreground">Contact</Label>
               <select
                 value={contactId}
-                onChange={(e) => setContactId(e.target.value)}
+                onChange={(e: any) => setContactId(e.target.value)}
                 className="h-9 w-full rounded-lg border border-border bg-muted px-2.5 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               >
                 <option value="">Select a contact</option>
@@ -301,7 +301,7 @@ export function DealForm({
                   <Input
                     type="number"
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e: any) => setValue(e.target.value)}
                     placeholder="0"
                     className="border-border bg-muted pl-7 text-foreground"
                   />
@@ -311,7 +311,7 @@ export function DealForm({
                 <Label className="text-muted-foreground">Currency</Label>
                 <select
                   value={currency}
-                  onChange={(e) => setCurrency(e.target.value)}
+                  onChange={(e: any) => setCurrency(e.target.value)}
                   className="h-9 w-full rounded-lg border border-border bg-muted px-2.5 text-sm text-foreground outline-none focus:border-primary"
                 >
                   {CURRENCIES.map((c) => (
@@ -328,7 +328,7 @@ export function DealForm({
               <Input
                 type="date"
                 value={expectedCloseDate}
-                onChange={(e) => setExpectedCloseDate(e.target.value)}
+                onChange={(e: any) => setExpectedCloseDate(e.target.value)}
                 className="border-border bg-muted text-foreground"
               />
             </div>
@@ -337,7 +337,7 @@ export function DealForm({
               <Label className="text-muted-foreground">Stage</Label>
               <select
                 value={stageId}
-                onChange={(e) => setStageId(e.target.value)}
+                onChange={(e: any) => setStageId(e.target.value)}
                 className="h-9 w-full rounded-lg border border-border bg-muted px-2.5 text-sm text-foreground outline-none focus:border-primary"
               >
                 {stages.map((s) => (
@@ -352,7 +352,7 @@ export function DealForm({
               <Label className="text-muted-foreground">Assigned To</Label>
               <select
                 value={assignedTo}
-                onChange={(e) => setAssignedTo(e.target.value)}
+                onChange={(e: any) => setAssignedTo(e.target.value)}
                 className="h-9 w-full rounded-lg border border-border bg-muted px-2.5 text-sm text-foreground outline-none focus:border-primary"
               >
                 <option value="">Unassigned</option>
@@ -368,7 +368,7 @@ export function DealForm({
               <Label className="text-muted-foreground">Notes</Label>
               <Textarea
                 value={notes}
-                onChange={(e) => setNotes(e.target.value)}
+                onChange={(e: any) => setNotes(e.target.value)}
                 placeholder="Add notes..."
                 className="min-h-[100px] border-border bg-muted text-foreground"
               />

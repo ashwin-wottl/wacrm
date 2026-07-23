@@ -610,7 +610,7 @@ function NodeEditSheet({
   const open = node !== null;
   if (!node) {
     return (
-      <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
+      <Sheet open={open} onOpenChange={(v: any) => !v && onClose()}>
         <SheetContent side="right" className="w-full sm:max-w-md" />
       </Sheet>
     );
@@ -618,7 +618,7 @@ function NodeEditSheet({
   const meta = NODE_META[node.node_type];
   const c = nodeColors(node.node_type);
   return (
-    <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
+    <Sheet open={open} onOpenChange={(v: any) => !v && onClose()}>
       <SheetContent
         side="right"
         className="border-border bg-popover flex w-full flex-col gap-0 border-l p-0 sm:max-w-md"

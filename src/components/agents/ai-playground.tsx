@@ -174,7 +174,7 @@ export function AiPlayground({ onGoToSetup }: { onGoToSetup?: () => void }) {
       <div className="flex items-end gap-2 border-t border-border p-3">
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e: any) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Type a customer message…"
           rows={1}

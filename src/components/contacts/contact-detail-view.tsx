@@ -495,7 +495,7 @@ export function ContactDetailView({
                     <Label className="text-muted-foreground text-xs">Name</Label>
                     <Input
                       value={editName}
-                      onChange={(e) => setEditName(e.target.value)}
+                      onChange={(e: any) => setEditName(e.target.value)}
                       className="bg-muted border-border text-foreground h-8 text-sm"
                     />
                   </div>
@@ -505,7 +505,7 @@ export function ContactDetailView({
                     </Label>
                     <Input
                       value={editPhone}
-                      onChange={(e) => setEditPhone(e.target.value)}
+                      onChange={(e: any) => setEditPhone(e.target.value)}
                       className="bg-muted border-border text-foreground h-8 text-sm"
                     />
                   </div>
@@ -513,7 +513,7 @@ export function ContactDetailView({
                     <Label className="text-muted-foreground text-xs">Email</Label>
                     <Input
                       value={editEmail}
-                      onChange={(e) => setEditEmail(e.target.value)}
+                      onChange={(e: any) => setEditEmail(e.target.value)}
                       className="bg-muted border-border text-foreground h-8 text-sm"
                     />
                   </div>
@@ -521,7 +521,7 @@ export function ContactDetailView({
                     <Label className="text-muted-foreground text-xs">Company</Label>
                     <Input
                       value={editCompany}
-                      onChange={(e) => setEditCompany(e.target.value)}
+                      onChange={(e: any) => setEditCompany(e.target.value)}
                       className="bg-muted border-border text-foreground h-8 text-sm"
                     />
                   </div>
@@ -585,7 +585,7 @@ export function ContactDetailView({
                 <div className="space-y-2 mb-3">
                   <Textarea
                     value={newNote}
-                    onChange={(e) => setNewNote(e.target.value)}
+                    onChange={(e: any) => setNewNote(e.target.value)}
                     placeholder="Write a note..."
                     className="bg-muted border-border text-foreground placeholder:text-muted-foreground min-h-[60px] text-sm resize-none"
                   />
@@ -664,7 +664,7 @@ export function ContactDetailView({
                         </Label>
                         <Input
                           value={customValues[field.id] ?? ''}
-                          onChange={(e) =>
+                          onChange={(e: any) =>
                             setCustomValues((prev) => ({
                               ...prev,
                               [field.id]: e.target.value,

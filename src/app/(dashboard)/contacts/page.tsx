@@ -387,7 +387,7 @@ export default function ContactsPage() {
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
               value={search}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 setSearch(e.target.value);
                 // Reset pagination when the query changes — the result
                 // set shrinks/grows, page N may no longer be valid.
@@ -592,7 +592,7 @@ export default function ContactsPage() {
                   className="border-border hover:bg-muted/50 cursor-pointer"
                   onClick={() => openDetail(contact.id)}
                 >
-                  <TableCell onClick={(e) => e.stopPropagation()}>
+                  <TableCell onClick={(e: any) => e.stopPropagation()}>
                     <Checkbox
                       checked={selected.has(contact.id)}
                       onCheckedChange={() => toggleSelect(contact.id)}
@@ -651,7 +651,7 @@ export default function ContactsPage() {
                             variant="ghost"
                             size="icon-sm"
                             className="text-muted-foreground hover:text-foreground"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e: any) => e.stopPropagation()}
                           />
                         }
                       >
@@ -662,7 +662,7 @@ export default function ContactsPage() {
                         className="bg-popover border-border"
                       >
                         <DropdownMenuItem
-                          onClick={(e) => {
+                          onClick={(e: any) => {
                             e.stopPropagation();
                             openEditForm(contact);
                           }}
@@ -674,7 +674,7 @@ export default function ContactsPage() {
                         <DropdownMenuSeparator className="bg-border" />
                         <DropdownMenuItem
                           variant="destructive"
-                          onClick={(e) => {
+                          onClick={(e: any) => {
                             e.stopPropagation();
                             confirmDelete(contact);
                           }}

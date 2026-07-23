@@ -177,8 +177,8 @@ export function CustomFieldsPanel() {
       <div className="flex items-center gap-2">
         <Input
           value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          onKeyDown={(e) => {
+          onChange={(e: any) => setNewName(e.target.value)}
+          onKeyDown={(e: any) => {
             if (e.key === 'Enter') {
               e.preventDefault();
               void handleCreate();
@@ -259,9 +259,9 @@ function FieldRow({
       <Input
         value={name}
         disabled={busy}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e: any) => setName(e.target.value)}
         onBlur={commit}
-        onKeyDown={(e) => {
+        onKeyDown={(e: any) => {
           if (e.key === 'Enter') e.currentTarget.blur();
         }}
         aria-label={`Rename ${field.field_name}`}

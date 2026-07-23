@@ -680,7 +680,7 @@ export function TemplateManager() {
               <Input
                 placeholder="e.g. order_confirmation"
                 value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e: any) => setForm({ ...form, name: e.target.value })}
                 disabled={editingId !== null}
                 className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-60 disabled:cursor-not-allowed"
               />
@@ -696,7 +696,7 @@ export function TemplateManager() {
                 <Label className="text-muted-foreground">Category</Label>
                 <Select
                   value={form.category}
-                  onValueChange={(val) =>
+                  onValueChange={(val: any) =>
                     setForm({
                       ...form,
                       category: val as MessageTemplate['category'],
@@ -726,7 +726,7 @@ export function TemplateManager() {
                   list="template-language-codes"
                   placeholder="en_US"
                   value={form.language}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setForm({ ...form, language: e.target.value })
                   }
                   disabled={editingId !== null}
@@ -754,7 +754,7 @@ export function TemplateManager() {
               <Label className="text-muted-foreground">Header</Label>
               <Select
                 value={form.header_format}
-                onValueChange={(val) =>
+                onValueChange={(val: any) =>
                   // Preserve header_content, header_media_url, and
                   // header_sample across format switches. The submit
                   // payload builder only reads the field that matches
@@ -792,7 +792,7 @@ export function TemplateManager() {
                     aria-label="Header text"
                     placeholder="Header text (max 60 chars, optional {{1}})"
                     value={form.header_content}
-                    onChange={(e) =>
+                    onChange={(e: any) =>
                       setForm({ ...form, header_content: e.target.value })
                     }
                     maxLength={TEMPLATE_LIMITS.headerTextMaxLength}
@@ -804,7 +804,7 @@ export function TemplateManager() {
                       aria-label="Sample value for header variable"
                       placeholder="Sample value for {{1}} (required for Meta review)"
                       value={form.header_sample}
-                      onChange={(e) =>
+                      onChange={(e: any) =>
                         setForm({ ...form, header_sample: e.target.value })
                       }
                       className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
@@ -822,7 +822,7 @@ export function TemplateManager() {
                         type="file"
                         accept="image/jpeg,image/png"
                         className="hidden"
-                        onChange={(e) => {
+                        onChange={(e: any) => {
                           const f = e.target.files?.[0];
                           if (f) void handleHeaderImageFile(f);
                           e.target.value = '';
@@ -850,7 +850,7 @@ export function TemplateManager() {
                   <Input
                     placeholder={`https://… (or paste a public ${form.header_format} link)`}
                     value={form.header_media_url}
-                    onChange={(e) =>
+                    onChange={(e: any) =>
                       setForm({ ...form, header_media_url: e.target.value })
                     }
                     className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
@@ -881,7 +881,7 @@ export function TemplateManager() {
               <Textarea
                 placeholder="Hello {{1}}, your order {{2}} is confirmed."
                 value={form.body_text}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   setForm({ ...form, body_text: e.target.value })
                 }
                 rows={4}
@@ -907,7 +907,7 @@ export function TemplateManager() {
                         aria-label={`Sample value for body variable {{${i + 1}}}`}
                         placeholder={`Sample for {{${i + 1}}}`}
                         value={val}
-                        onChange={(e) => {
+                        onChange={(e: any) => {
                           const next = [...form.body_samples];
                           next[i] = e.target.value;
                           setForm({ ...form, body_samples: next });
@@ -925,7 +925,7 @@ export function TemplateManager() {
               <Input
                 placeholder="Optional footer text (max 60 chars)"
                 value={form.footer_text}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   setForm({ ...form, footer_text: e.target.value })
                 }
                 maxLength={TEMPLATE_LIMITS.footerMaxLength}
@@ -963,7 +963,7 @@ export function TemplateManager() {
                       <div className="flex items-center gap-2">
                         <Select
                           value={btn.type}
-                          onValueChange={(val) => {
+                          onValueChange={(val: any) => {
                             // Same null guard as the Header Select
                             // (per PR 148): @base-ui Select fires
                             // onValueChange(null) on deselect.
@@ -1005,7 +1005,7 @@ export function TemplateManager() {
                           placeholder="Button label"
                           value={btn.text}
                           maxLength={TEMPLATE_LIMITS.buttonTextMaxLength}
-                          onChange={(e) =>
+                          onChange={(e: any) =>
                             updateButton(i, { text: e.target.value })
                           }
                           className="flex-1 bg-muted border-border text-foreground placeholder:text-muted-foreground h-8 text-xs"
@@ -1025,7 +1025,7 @@ export function TemplateManager() {
                           <Input
                             placeholder="https://example.com/path or with {{1}} suffix"
                             value={btn.url}
-                            onChange={(e) =>
+                            onChange={(e: any) =>
                               updateButton(i, { url: e.target.value })
                             }
                             className="bg-muted border-border text-foreground placeholder:text-muted-foreground h-8 text-xs"
@@ -1034,7 +1034,7 @@ export function TemplateManager() {
                             <Input
                               placeholder="Example value for {{1}} (required when URL has a variable)"
                               value={btn.example ?? ''}
-                              onChange={(e) =>
+                              onChange={(e: any) =>
                                 updateButton(i, { example: e.target.value })
                               }
                               className="bg-muted border-border text-foreground placeholder:text-muted-foreground h-8 text-xs"
@@ -1046,7 +1046,7 @@ export function TemplateManager() {
                         <Input
                           placeholder="+15551234567"
                           value={btn.phone_number}
-                          onChange={(e) =>
+                          onChange={(e: any) =>
                             updateButton(i, { phone_number: e.target.value })
                           }
                           className="bg-muted border-border text-foreground placeholder:text-muted-foreground h-8 text-xs"
@@ -1056,7 +1056,7 @@ export function TemplateManager() {
                         <Input
                           placeholder="Example code (e.g. SUMMER20)"
                           value={btn.example}
-                          onChange={(e) =>
+                          onChange={(e: any) =>
                             updateButton(i, { example: e.target.value })
                           }
                           className="bg-muted border-border text-foreground placeholder:text-muted-foreground h-8 text-xs"

@@ -371,7 +371,7 @@ function CreateKeyDialog({
                   readOnly
                   value={createdKey}
                   className="font-mono text-xs"
-                  onFocus={(e) => e.currentTarget.select()}
+                  onFocus={(e: any) => e.currentTarget.select()}
                 />
                 <Button type="button" variant="outline" onClick={copyKey}>
                   <Copy className="size-4" />
@@ -413,7 +413,7 @@ function CreateKeyDialog({
                   value={name}
                   maxLength={80}
                   placeholder="e.g. Zapier automation"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e: any) => setName(e.target.value)}
                 />
               </div>
 
@@ -427,7 +427,7 @@ function CreateKeyDialog({
                     >
                       <Checkbox
                         checked={scopes.includes(scope)}
-                        onCheckedChange={(checked) =>
+                        onCheckedChange={(checked: boolean | 'indeterminate') =>
                           toggleScope(scope, checked === true)
                         }
                         className="mt-0.5"

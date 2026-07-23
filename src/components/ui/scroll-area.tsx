@@ -9,12 +9,14 @@ function ScrollArea({
   className,
   children,
   ...props
-}: ScrollAreaPrimitive.Root.Props) {
+}: ScrollAreaPrimitive.Root.Props & { className?: string; children?: React.ReactNode }) {
   return (
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
-      className={cn("relative", className)}
-      {...props}
+      {...({
+        className: cn("relative", className),
+        ...props
+      } as any)}
     >
       <ScrollAreaPrimitive.Viewport
         data-slot="scroll-area-viewport"
@@ -32,21 +34,25 @@ function ScrollBar({
   className,
   orientation = "vertical",
   ...props
-}: ScrollAreaPrimitive.Scrollbar.Props) {
+}: ScrollAreaPrimitive.Scrollbar.Props & { className?: string; children?: React.ReactNode }) {
   return (
     <ScrollAreaPrimitive.Scrollbar
       data-slot="scroll-area-scrollbar"
       data-orientation={orientation}
       orientation={orientation}
-      className={cn(
-        "flex touch-none p-px transition-colors select-none data-horizontal:h-2.5 data-horizontal:flex-col data-horizontal:border-t data-horizontal:border-t-transparent data-vertical:h-full data-vertical:w-2.5 data-vertical:border-l data-vertical:border-l-transparent",
-        className
-      )}
-      {...props}
+      {...({
+        className: cn(
+          "flex touch-none p-px transition-colors select-none data-horizontal:h-2.5 data-horizontal:flex-col data-horizontal:border-t data-horizontal:border-t-transparent data-vertical:h-full data-vertical:w-2.5 data-vertical:border-l data-vertical:border-l-transparent",
+          className
+        ),
+        ...props
+      } as any)}
     >
       <ScrollAreaPrimitive.Thumb
         data-slot="scroll-area-thumb"
-        className="relative flex-1 rounded-full bg-border"
+        {...({
+          className: "relative flex-1 rounded-full bg-border"
+        } as any)}
       />
     </ScrollAreaPrimitive.Scrollbar>
   )

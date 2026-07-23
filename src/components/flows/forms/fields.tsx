@@ -47,14 +47,14 @@ export function TextRow({
       {rows > 1 ? (
         <Textarea
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e: any) => onChange(e.target.value)}
           rows={rows}
           className="bg-muted"
         />
       ) : (
         <Input
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e: any) => onChange(e.target.value)}
           className="bg-muted"
         />
       )}
@@ -82,7 +82,7 @@ export function NextNodeRow({
         value={value || null}
         nodes={allNodes}
         excludeKey={currentKey}
-        onChange={(v) => onChange(v ?? "")}
+        onChange={(v: any) => onChange(v ?? "")}
         placeholder="Pick a next node…"
       />
     </div>
@@ -108,7 +108,7 @@ export function NodeKeySelect({
   return (
     <Select
       value={value ?? "__none__"}
-      onValueChange={(v) => onChange(v === "__none__" ? null : v)}
+      onValueChange={(v: any) => onChange(v === "__none__" ? null : v)}
     >
       <SelectTrigger className={cn("bg-muted", className)}>
         <SelectValue placeholder={placeholder ?? "—"} />

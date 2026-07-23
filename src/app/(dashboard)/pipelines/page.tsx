@@ -431,10 +431,10 @@ export default function PipelinesPage() {
             <Label className="text-muted-foreground">Pipeline Name</Label>
             <Input
               value={newPipelineName}
-              onChange={(e) => setNewPipelineName(e.target.value)}
+              onChange={(e: any) => setNewPipelineName(e.target.value)}
               placeholder="e.g., Enterprise Sales"
               className="mt-2 bg-muted border-border text-foreground"
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === "Enter") handleCreatePipeline();
               }}
             />

@@ -205,8 +205,8 @@ export function TagManager() {
               <Input
                 placeholder="e.g. Newsletter"
                 value={newTagName}
-                onChange={(e) => setNewTagName(e.target.value)}
-                onKeyDown={(e) => {
+                onChange={(e: any) => setNewTagName(e.target.value)}
+                onKeyDown={(e: any) => {
                   if (e.key === 'Enter') handleCreate();
                 }}
                 disabled={saving}

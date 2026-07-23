@@ -294,10 +294,10 @@ export default function FlowsPage() {
             </p>
             <Input
               value={newName}
-              onChange={(e) => setNewName(e.target.value)}
+              onChange={(e: any) => setNewName(e.target.value)}
               placeholder="e.g. Welcome menu"
               className="bg-muted"
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === "Enter") handleCreate();
               }}
             />

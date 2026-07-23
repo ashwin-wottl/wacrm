@@ -266,7 +266,7 @@ export function TemplatePicker({
                 </Label>
                 <Input
                   value={headerText}
-                  onChange={(e) => setHeaderText(e.target.value)}
+                  onChange={(e: any) => setHeaderText(e.target.value)}
                   placeholder="Value for the header variable"
                   className="border-border bg-muted text-foreground placeholder:text-muted-foreground"
                 />
@@ -277,7 +277,7 @@ export function TemplatePicker({
                 <Label className="text-xs text-popover-foreground">{`Body {{${v}}}`}</Label>
                 <Input
                   value={params[i] ?? ""}
-                  onChange={(e) => {
+                  onChange={(e: any) => {
                     const next = [...params];
                     next[i] = e.target.value;
                     setParams(next);
@@ -294,7 +294,7 @@ export function TemplatePicker({
                 </Label>
                 <Input
                   value={buttonParams[slot.index] ?? ""}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setButtonParams((prev) => ({
                       ...prev,
                       [slot.index]: e.target.value,

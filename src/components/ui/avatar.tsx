@@ -32,7 +32,7 @@ function Avatar({
 function AvatarImage({
   className,
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Image> & { className?: string }) {
+}: React.ComponentProps<typeof AvatarPrimitive.Image> & { className?: string; src?: string; alt?: string }) {
   return (
     <AvatarPrimitive.Image
       data-slot="avatar-image"
@@ -50,7 +50,7 @@ function AvatarImage({
 function AvatarFallback({
   className,
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Fallback> & { className?: string }) {
+}: React.ComponentProps<typeof AvatarPrimitive.Fallback> & { className?: string; children?: React.ReactNode }) {
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"

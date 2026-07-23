@@ -238,9 +238,9 @@ function KeywordsInput({
   return (
     <Input
       value={draft}
-      onChange={(e) => setDraft(e.target.value)}
+      onChange={(e: any) => setDraft(e.target.value)}
       onBlur={commit}
-      onKeyDown={(e) => {
+      onKeyDown={(e: any) => {
         if (e.key === 'Enter') {
           e.preventDefault();
           commit();
@@ -275,7 +275,7 @@ function TriggerPanel({
           </label>
           <Select
             value={state.trigger_type}
-            onValueChange={(v) =>
+            onValueChange={(v: string) =>
               setState((s) => ({
                 ...s,
                 trigger_type: v as BuilderState['trigger_type'],
@@ -541,7 +541,7 @@ function NodeConfigWithAdvanced({
               </label>
               <Input
                 value={node.node_key}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   onUpdate({ node_key: slugify(e.target.value, node.node_key) })
                 }
                 className="bg-muted font-mono text-xs"

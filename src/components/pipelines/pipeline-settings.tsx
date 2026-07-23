@@ -242,7 +242,7 @@ export function PipelineSettings({
                 <Label className="text-muted-foreground">Pipeline Name</Label>
                 <Input
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e: any) => setName(e.target.value)}
                   className="border-border bg-muted text-foreground"
                 />
               </div>
@@ -263,12 +263,12 @@ export function PipelineSettings({
                         <SortableStageRow
                           key={stage.id}
                           stage={stage}
-                          onNameChange={(v) => {
+                          onNameChange={(v: any) => {
                             const updated = [...localStages];
                             updated[index] = { ...updated[index], name: v };
                             setLocalStages(updated);
                           }}
-                          onColorChange={(v) => {
+                          onColorChange={(v: any) => {
                             const updated = [...localStages];
                             updated[index] = { ...updated[index], color: v };
                             setLocalStages(updated);
@@ -303,10 +303,10 @@ export function PipelineSettings({
                 <div className="flex items-center gap-2">
                   <Input
                     value={newStageName}
-                    onChange={(e) => setNewStageName(e.target.value)}
+                    onChange={(e: any) => setNewStageName(e.target.value)}
                     placeholder="New stage name"
                     className="border-border bg-muted text-sm text-foreground"
-                    onKeyDown={(e) => {
+                    onKeyDown={(e: any) => {
                       if (e.key === "Enter") handleAddStage();
                     }}
                   />
@@ -403,7 +403,7 @@ function SortableStageRow({
       <ColorSwatch value={stage.color} onChange={onColorChange} colors={colors} />
       <Input
         value={stage.name}
-        onChange={(e) => onNameChange(e.target.value)}
+        onChange={(e: any) => onNameChange(e.target.value)}
         className="h-7 flex-1 border-transparent bg-transparent text-sm text-foreground focus:border-border"
       />
       <Button

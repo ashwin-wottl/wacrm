@@ -70,7 +70,7 @@ export function NodeConfigForm({
           value={(cfg as { next_node_key?: string }).next_node_key ?? ""}
           allNodes={allNodes}
           currentKey={node.node_key}
-          onChange={(v) => onUpdateConfig({ next_node_key: v })}
+          onChange={(v: any) => onUpdateConfig({ next_node_key: v })}
           label="Advances to"
         />
       );
@@ -81,13 +81,13 @@ export function NodeConfigForm({
           <TextRow
             label="Text sent to the customer"
             value={(cfg as { text?: string }).text ?? ""}
-            onChange={(v) => onUpdateConfig({ text: v })}
+            onChange={(v: any) => onUpdateConfig({ text: v })}
           />
           <NextNodeRow
             value={(cfg as { next_node_key?: string }).next_node_key ?? ""}
             allNodes={allNodes}
             currentKey={node.node_key}
-            onChange={(v) => onUpdateConfig({ next_node_key: v })}
+            onChange={(v: any) => onUpdateConfig({ next_node_key: v })}
             label="Advances to"
           />
         </>
@@ -131,7 +131,7 @@ export function NodeConfigForm({
           <TextRow
             label="Prompt sent to the customer"
             value={(cfg as { prompt_text?: string }).prompt_text ?? ""}
-            onChange={(v) => onUpdateConfig({ prompt_text: v })}
+            onChange={(v: any) => onUpdateConfig({ prompt_text: v })}
             rows={2}
           />
           <div>
@@ -140,7 +140,7 @@ export function NodeConfigForm({
             </label>
             <Input
               value={(cfg as { var_key?: string }).var_key ?? ""}
-              onChange={(e) =>
+              onChange={(e: any) =>
                 onUpdateConfig({
                   var_key: e.target.value.replace(/[^a-zA-Z0-9_]/g, ""),
                 })
@@ -162,7 +162,7 @@ export function NodeConfigForm({
             value={(cfg as { next_node_key?: string }).next_node_key ?? ""}
             allNodes={allNodes}
             currentKey={node.node_key}
-            onChange={(v) => onUpdateConfig({ next_node_key: v })}
+            onChange={(v: any) => onUpdateConfig({ next_node_key: v })}
             label="After capturing, advance to"
           />
         </>
@@ -193,7 +193,7 @@ export function NodeConfigForm({
         <TextRow
           label="Internal note (for the agent picking up)"
           value={(cfg as { note?: string }).note ?? ""}
-          onChange={(v) => onUpdateConfig({ note: v })}
+          onChange={(v: any) => onUpdateConfig({ note: v })}
           rows={2}
         />
       );
@@ -259,13 +259,13 @@ function SendButtonsForm({
       <TextRow
         label="Body text"
         value={cfg.text ?? ""}
-        onChange={(v) => onUpdateConfig({ text: v })}
+        onChange={(v: any) => onUpdateConfig({ text: v })}
         rows={3}
       />
       <TextRow
         label="Footer (optional, 60 chars)"
         value={cfg.footer_text ?? ""}
-        onChange={(v) => onUpdateConfig({ footer_text: v })}
+        onChange={(v: any) => onUpdateConfig({ footer_text: v })}
       />
       <div>
         <div className="mb-2 flex items-center justify-between">
@@ -287,7 +287,7 @@ function SendButtonsForm({
               {showAdvanced && (
                 <Input
                   value={b.reply_id}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     updateButton(i, {
                       reply_id: slugify(e.target.value, `btn_${i + 1}`),
                     })
@@ -298,7 +298,7 @@ function SendButtonsForm({
               )}
               <Input
                 value={b.title}
-                onChange={(e) => updateButton(i, { title: e.target.value })}
+                onChange={(e: any) => updateButton(i, { title: e.target.value })}
                 placeholder="Visible title (≤20 chars)"
                 className="bg-muted"
                 maxLength={20}
@@ -307,7 +307,7 @@ function SendButtonsForm({
                 value={b.next_node_key || null}
                 nodes={allNodes}
                 excludeKey={currentKey}
-                onChange={(v) => updateButton(i, { next_node_key: v ?? "" })}
+                onChange={(v: any) => updateButton(i, { next_node_key: v ?? "" })}
                 placeholder="Next node…"
               />
               <Button
@@ -448,19 +448,19 @@ function SendListForm({
       <TextRow
         label="Body text"
         value={cfg.text ?? ""}
-        onChange={(v) => onUpdateConfig({ text: v })}
+        onChange={(v: any) => onUpdateConfig({ text: v })}
         rows={3}
       />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <TextRow
           label="Tap-to-expand button label (≤20 chars)"
           value={cfg.button_label ?? ""}
-          onChange={(v) => onUpdateConfig({ button_label: v })}
+          onChange={(v: any) => onUpdateConfig({ button_label: v })}
         />
         <TextRow
           label="Footer (optional, 60 chars)"
           value={cfg.footer_text ?? ""}
-          onChange={(v) => onUpdateConfig({ footer_text: v })}
+          onChange={(v: any) => onUpdateConfig({ footer_text: v })}
         />
       </div>
 
@@ -476,7 +476,7 @@ function SendListForm({
             <div className="mb-2 flex items-center gap-2">
               <Input
                 value={section.title ?? ""}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   updateSection(sIdx, { title: e.target.value })
                 }
                 placeholder={`Section ${sIdx + 1} title (optional)`}
@@ -507,7 +507,7 @@ function SendListForm({
                 {showAdvanced && (
                   <Input
                     value={row.reply_id}
-                    onChange={(e) =>
+                    onChange={(e: any) =>
                       updateRow(sIdx, rIdx, {
                         reply_id: slugify(
                           e.target.value,
@@ -521,7 +521,7 @@ function SendListForm({
                 )}
                 <Input
                   value={row.title}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     updateRow(sIdx, rIdx, { title: e.target.value })
                   }
                   placeholder="Row title (≤24)"
@@ -532,7 +532,7 @@ function SendListForm({
                   value={row.next_node_key || null}
                   nodes={allNodes}
                   excludeKey={currentKey}
-                  onChange={(v) =>
+                  onChange={(v: any) =>
                     updateRow(sIdx, rIdx, { next_node_key: v ?? "" })
                   }
                   placeholder="Next node…"
@@ -617,7 +617,7 @@ function ConditionForm({
           <label className="mb-1 block text-xs text-muted-foreground">If</label>
           <Select
             value={subject}
-            onValueChange={(v) =>
+            onValueChange={(v: any) =>
               onUpdateConfig({ subject: v as ConditionCfg["subject"] })
             }
           >
@@ -642,7 +642,7 @@ function ConditionForm({
           {subject === "tag" && tags.length > 0 ? (
             <Select
               value={cfg.subject_key ?? ""}
-              onValueChange={(v) => onUpdateConfig({ subject_key: v })}
+              onValueChange={(v: any) => onUpdateConfig({ subject_key: v })}
             >
               <SelectTrigger className="bg-muted">
                 <SelectValue placeholder="Pick a tag…" />
@@ -658,7 +658,7 @@ function ConditionForm({
           ) : subject === "contact_field" ? (
             <Select
               value={cfg.subject_key ?? ""}
-              onValueChange={(v) => onUpdateConfig({ subject_key: v })}
+              onValueChange={(v: any) => onUpdateConfig({ subject_key: v })}
             >
               <SelectTrigger className="bg-muted">
                 <SelectValue placeholder="Pick a field…" />
@@ -673,7 +673,7 @@ function ConditionForm({
           ) : (
             <Input
               value={cfg.subject_key ?? ""}
-              onChange={(e) =>
+              onChange={(e: any) =>
                 onUpdateConfig({ subject_key: e.target.value })
               }
               placeholder={subject === "var" ? "e.g. email" : "tag UUID"}
@@ -693,7 +693,7 @@ function ConditionForm({
           <label className="mb-1 block text-xs text-muted-foreground">Operator</label>
           <Select
             value={operator}
-            onValueChange={(v) =>
+            onValueChange={(v: any) =>
               onUpdateConfig({ operator: v as ConditionCfg["operator"] })
             }
           >
@@ -713,7 +713,7 @@ function ConditionForm({
             <label className="mb-1 block text-xs text-muted-foreground">Value</label>
             <Input
               value={cfg.value ?? ""}
-              onChange={(e) => onUpdateConfig({ value: e.target.value })}
+              onChange={(e: any) => onUpdateConfig({ value: e.target.value })}
               className="bg-muted"
             />
           </div>
@@ -725,14 +725,14 @@ function ConditionForm({
           value={cfg.true_next ?? ""}
           allNodes={allNodes}
           currentKey={currentKey}
-          onChange={(v) => onUpdateConfig({ true_next: v })}
+          onChange={(v: any) => onUpdateConfig({ true_next: v })}
           label="If true → advance to"
         />
         <NextNodeRow
           value={cfg.false_next ?? ""}
           allNodes={allNodes}
           currentKey={currentKey}
-          onChange={(v) => onUpdateConfig({ false_next: v })}
+          onChange={(v: any) => onUpdateConfig({ false_next: v })}
           label="If false → advance to"
         />
       </div>
@@ -770,7 +770,7 @@ function SetTagForm({
           <label className="mb-1 block text-xs text-muted-foreground">Action</label>
           <Select
             value={cfg.mode ?? "add"}
-            onValueChange={(v) =>
+            onValueChange={(v: any) =>
               onUpdateConfig({ mode: v as SetTagCfg["mode"] })
             }
           >
@@ -788,7 +788,7 @@ function SetTagForm({
           {tags.length > 0 ? (
             <Select
               value={cfg.tag_id ?? ""}
-              onValueChange={(v) => onUpdateConfig({ tag_id: v })}
+              onValueChange={(v: any) => onUpdateConfig({ tag_id: v })}
             >
               <SelectTrigger className="bg-muted">
                 <SelectValue placeholder="Pick a tag…" />
@@ -804,7 +804,7 @@ function SetTagForm({
           ) : (
             <Input
               value={cfg.tag_id ?? ""}
-              onChange={(e) => onUpdateConfig({ tag_id: e.target.value })}
+              onChange={(e: any) => onUpdateConfig({ tag_id: e.target.value })}
               placeholder="Tag UUID"
               className="bg-muted font-mono text-xs"
             />
@@ -815,7 +815,7 @@ function SetTagForm({
         value={cfg.next_node_key ?? ""}
         allNodes={allNodes}
         currentKey={currentKey}
-        onChange={(v) => onUpdateConfig({ next_node_key: v })}
+        onChange={(v: any) => onUpdateConfig({ next_node_key: v })}
         label="Then advance to"
       />
     </>
@@ -933,7 +933,7 @@ function SendMediaForm({
         <label className="mb-1 block text-xs text-muted-foreground">Media type</label>
         <Select
           value={mediaType}
-          onValueChange={(v) => {
+          onValueChange={(v: any) => {
             // Changing type clears the existing file — the bucket
             // accepts different MIME sets per type and a previously
             // uploaded PDF can't be sent as an image.
@@ -1006,7 +1006,7 @@ function SendMediaForm({
           type="file"
           accept={MEDIA_ACCEPT[mediaType]}
           className="hidden"
-          onChange={(e) => {
+          onChange={(e: any) => {
             const f = e.target.files?.[0];
             if (f) void handleFile(f);
             // Reset so picking the same file twice still fires onChange.
@@ -1018,7 +1018,7 @@ function SendMediaForm({
       <TextRow
         label="Caption (optional, shown under the media)"
         value={cfg.caption ?? ""}
-        onChange={(v) => onUpdateConfig({ caption: v })}
+        onChange={(v: any) => onUpdateConfig({ caption: v })}
         rows={2}
       />
 
@@ -1029,7 +1029,7 @@ function SendMediaForm({
           </label>
           <Input
             value={cfg.filename ?? ""}
-            onChange={(e) => onUpdateConfig({ filename: e.target.value })}
+            onChange={(e: any) => onUpdateConfig({ filename: e.target.value })}
             placeholder="invoice.pdf"
             className="bg-muted text-xs"
           />
@@ -1040,7 +1040,7 @@ function SendMediaForm({
         value={cfg.next_node_key ?? ""}
         allNodes={allNodes}
         currentKey={currentKey}
-        onChange={(v) => onUpdateConfig({ next_node_key: v })}
+        onChange={(v: any) => onUpdateConfig({ next_node_key: v })}
         label="After sending, advance to"
       />
     </>

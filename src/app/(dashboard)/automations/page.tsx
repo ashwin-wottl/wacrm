@@ -227,7 +227,7 @@ export default function AutomationsPage() {
         </ul>
       )}
 
-      <Dialog open={!!pendingDelete} onOpenChange={(v) => !v && setPendingDelete(null)}>
+      <Dialog open={!!pendingDelete} onOpenChange={(v: any) => !v && setPendingDelete(null)}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete automation</DialogTitle>
@@ -325,7 +325,7 @@ function AutomationCard({
         <div className="flex items-center gap-3">
           <Switch
             checked={automation.is_active}
-            onCheckedChange={(v) => onToggle(!!v)}
+            onCheckedChange={(v: boolean) => onToggle(!!v)}
             aria-label={automation.is_active ? "Deactivate" : "Activate"}
           />
 

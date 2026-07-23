@@ -131,7 +131,7 @@ const LegendItem = ({
           ? "cursor-pointer hover:bg-muted"
           : "cursor-default",
       )}
-      onClick={(e) => {
+      onClick={(e: any) => {
         e.stopPropagation()
         onClick?.(name, color)
       }}
@@ -198,15 +198,15 @@ const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
           : "cursor-pointer text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
       disabled={disabled}
-      onClick={(e) => {
+      onClick={(e: any) => {
         e.stopPropagation()
         onClick?.()
       }}
-      onMouseDown={(e) => {
+      onMouseDown={(e: any) => {
         e.stopPropagation()
         setIsPressed(true)
       }}
-      onMouseUp={(e) => {
+      onMouseUp={(e: any) => {
         e.stopPropagation()
         setIsPressed(false)
       }}

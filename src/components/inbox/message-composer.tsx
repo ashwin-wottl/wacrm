@@ -457,7 +457,7 @@ export function MessageComposer({
         type="file"
         accept={PICKER_ACCEPT.image}
         className="hidden"
-        onChange={(e) => {
+        onChange={(e: any) => {
           handlePicked("image", e.target.files?.[0]);
           e.target.value = "";
         }}
@@ -467,7 +467,7 @@ export function MessageComposer({
         type="file"
         accept={PICKER_ACCEPT.video}
         className="hidden"
-        onChange={(e) => {
+        onChange={(e: any) => {
           handlePicked("video", e.target.files?.[0]);
           e.target.value = "";
         }}
@@ -477,7 +477,7 @@ export function MessageComposer({
         type="file"
         accept={PICKER_ACCEPT.document}
         className="hidden"
-        onChange={(e) => {
+        onChange={(e: any) => {
           handlePicked("document", e.target.files?.[0]);
           e.target.value = "";
         }}
@@ -696,8 +696,8 @@ function MediaDraftPreview({
           <input
             value={draft.caption}
             maxLength={MEDIA_CAPTION_MAX}
-            onChange={(e) => onCaptionChange(e.target.value)}
-            onKeyDown={(e) => {
+            onChange={(e: any) => onCaptionChange(e.target.value)}
+            onKeyDown={(e: any) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 onSend();

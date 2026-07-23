@@ -32,7 +32,7 @@ export function DealCard({ deal, stage, onEdit, isOverlay }: DealCardProps) {
   return (
     <button
       type="button"
-      onClick={(e) => {
+      onClick={(e: any) => {
         // `onClick` still fires after a non-drag tap because the PointerSensor
         // requires 5px movement before it counts as a drag.
         if (isOverlay) return;

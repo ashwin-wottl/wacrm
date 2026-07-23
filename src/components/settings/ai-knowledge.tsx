@@ -227,7 +227,7 @@ export function AiKnowledgeCard({
                   <Input
                     id="kb-title"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e: any) => setTitle(e.target.value)}
                     placeholder="e.g. Returns & refunds policy"
                     disabled={saving}
                   />
@@ -237,7 +237,7 @@ export function AiKnowledgeCard({
                   <Textarea
                     id="kb-content"
                     value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={(e: any) => setContent(e.target.value)}
                     placeholder="Paste the FAQ answer, policy text, or product details…"
                     rows={8}
                     disabled={saving}

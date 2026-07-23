@@ -243,7 +243,7 @@ export function ContactForm({
             <Input
               id="cf-name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e: any) => setName(e.target.value)}
               placeholder="John Doe"
               className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
             />
@@ -256,7 +256,7 @@ export function ContactForm({
             <Input
               id="cf-phone"
               value={phone}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 setPhone(e.target.value);
                 if (dupMatch) setDupMatch(null);
               }}
@@ -305,7 +305,7 @@ export function ContactForm({
               id="cf-email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: any) => setEmail(e.target.value)}
               placeholder="john@example.com"
               className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
             />
@@ -318,7 +318,7 @@ export function ContactForm({
             <Input
               id="cf-company"
               value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={(e: any) => setCompany(e.target.value)}
               placeholder="Acme Inc."
               className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
             />

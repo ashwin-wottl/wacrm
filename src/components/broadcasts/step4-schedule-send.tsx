@@ -104,7 +104,7 @@ export function Step4ScheduleSend({
         <label className="mb-1.5 block text-sm font-medium text-foreground">Broadcast Name</label>
         <Input
           value={name}
-          onChange={(e) => onNameChange(e.target.value)}
+          onChange={(e: any) => onNameChange(e.target.value)}
           placeholder="e.g. Summer Sale Announcement"
           className="border-border bg-muted text-foreground placeholder:text-muted-foreground"
         />

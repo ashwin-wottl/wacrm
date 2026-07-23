@@ -352,7 +352,7 @@ export function Step2SelectAudience({
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_140px_minmax(0,1fr)]">
               <select
                 value={audience.customField?.fieldId ?? ''}
-                onChange={(e) => updateCustomField({ fieldId: e.target.value })}
+                onChange={(e: any) => updateCustomField({ fieldId: e.target.value })}
                 className="h-9 rounded-lg border border-border bg-muted px-2.5 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               >
                 <option value="">Select field…</option>
@@ -364,7 +364,7 @@ export function Step2SelectAudience({
               </select>
               <select
                 value={audience.customField?.operator ?? 'is'}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   updateCustomField({
                     operator: e.target.value as CustomFieldOperator,
                   })
@@ -380,7 +380,7 @@ export function Step2SelectAudience({
               <input
                 type="text"
                 value={audience.customField?.value ?? ''}
-                onChange={(e) => updateCustomField({ value: e.target.value })}
+                onChange={(e: any) => updateCustomField({ value: e.target.value })}
                 placeholder="Value"
                 className="h-9 rounded-lg border border-border bg-muted px-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
               />

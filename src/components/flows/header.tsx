@@ -75,7 +75,7 @@ export function EditorHeader() {
         </span>
         <input
           value={state.name}
-          onChange={(e) => setState((s) => ({ ...s, name: e.target.value }))}
+          onChange={(e: any) => setState((s) => ({ ...s, name: e.target.value }))}
           placeholder="Flow name"
           spellCheck={false}
           aria-label="Flow name"
@@ -163,7 +163,7 @@ export function EditorHeader() {
       {/* ---- description note (subtle, inline-editable) ---- */}
       <input
         value={state.description}
-        onChange={(e) =>
+        onChange={(e: any) =>
           setState((s) => ({ ...s, description: e.target.value }))
         }
         placeholder="Add a short description (internal — customers don't see this)"

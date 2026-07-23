@@ -296,7 +296,7 @@ function TagSelect({
       <Input
         placeholder="Tag id"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e: any) => onChange(e.target.value)}
         className="bg-muted text-foreground"
       />
     )
@@ -311,7 +311,7 @@ function TagSelect({
       />
       <select
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e: any) => onChange(e.target.value)}
         className={SELECT_CLASS}
       >
         <option value="">Select a tag…</option>
@@ -348,7 +348,7 @@ function ContactFieldSelect({
   return (
     <select
       value={value || "name"}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e: any) => onChange(e.target.value)}
       className={SELECT_CLASS}
     >
       <option value="name">Name</option>
@@ -385,7 +385,7 @@ function AgentSelect({
       <Input
         placeholder="Agent id"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e: any) => onChange(e.target.value)}
         className="bg-muted text-foreground"
       />
     )
@@ -394,7 +394,7 @@ function AgentSelect({
   return (
     <select
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e: any) => onChange(e.target.value)}
       className={SELECT_CLASS}
     >
       <option value="">Select an agent…</option>
@@ -429,7 +429,7 @@ function DealPipelineFields({
         <FieldBlock label="Pipeline id">
           <Input
             value={pipelineId}
-            onChange={(e) =>
+            onChange={(e: any) =>
               onChange({ pipeline_id: e.target.value, stage_id: stageId })
             }
             className="bg-muted text-foreground"
@@ -438,7 +438,7 @@ function DealPipelineFields({
         <FieldBlock label="Stage id">
           <Input
             value={stageId}
-            onChange={(e) =>
+            onChange={(e: any) =>
               onChange({ pipeline_id: pipelineId, stage_id: e.target.value })
             }
             className="bg-muted text-foreground"
@@ -457,7 +457,7 @@ function DealPipelineFields({
       <FieldBlock label="Pipeline">
         <select
           value={pipelineId}
-          onChange={(e) => {
+          onChange={(e: any) => {
             const nextPipelineId = e.target.value
             const firstStage = stages.find(
               (s) => s.pipeline_id === nextPipelineId
@@ -483,7 +483,7 @@ function DealPipelineFields({
       <FieldBlock label="Stage">
         <select
           value={stageId}
-          onChange={(e) =>
+          onChange={(e: any) =>
             onChange({ pipeline_id: pipelineId, stage_id: e.target.value })
           }
           className={SELECT_CLASS}
@@ -526,7 +526,7 @@ function SendTemplateFields({
         <FieldBlock label="Template name">
           <Input
             value={templateName}
-            onChange={(e) =>
+            onChange={(e: any) =>
               onChange({ template_name: e.target.value, language })
             }
             className="bg-muted text-foreground"
@@ -535,7 +535,7 @@ function SendTemplateFields({
         <FieldBlock label="Language">
           <Input
             value={language}
-            onChange={(e) =>
+            onChange={(e: any) =>
               onChange({ template_name: templateName, language: e.target.value })
             }
             className="bg-muted text-foreground"
@@ -557,7 +557,7 @@ function SendTemplateFields({
     <FieldBlock label="Template">
       <select
         value={current}
-        onChange={(e) => {
+        onChange={(e: any) => {
           const [name, lang] = e.target.value.split("::")
           onChange({ template_name: name ?? "", language: lang ?? "" })
         }}
@@ -687,7 +687,7 @@ export function AutomationBuilder({ initial }: { initial: BuilderInitial }) {
         </button>
         <input
           value={state.name}
-          onChange={(e) => patchTop("name", e.target.value)}
+          onChange={(e: any) => patchTop("name", e.target.value)}
           placeholder="Untitled automation"
           className="min-w-0 flex-1 rounded-md bg-transparent px-2 py-1 text-sm font-semibold text-foreground placeholder:text-muted-foreground focus:bg-muted focus:outline-none sm:text-base"
         />
@@ -695,7 +695,7 @@ export function AutomationBuilder({ initial }: { initial: BuilderInitial }) {
           <span className="hidden sm:inline">Active</span>
           <Switch
             checked={state.is_active}
-            onCheckedChange={(v) => patchTop("is_active", !!v)}
+            onCheckedChange={(v: boolean) => patchTop("is_active", v)}
             aria-label="Active"
           />
         </div>
@@ -718,7 +718,7 @@ export function AutomationBuilder({ initial }: { initial: BuilderInitial }) {
               type={state.trigger_type}
               config={state.trigger_config}
               onTypeChange={(t) => patchTop("trigger_type", t)}
-              onConfigChange={(c) => patchTop("trigger_config", c)}
+              onConfigChange={(c: any) => patchTop("trigger_config", c)}
             />
             <StepList
               steps={state.steps}
@@ -784,7 +784,7 @@ function TriggerCard({
               </label>
               <select
                 value={type}
-                onChange={(e) => onTypeChange(e.target.value as AutomationTriggerType)}
+                onChange={(e: any) => onTypeChange(e.target.value as AutomationTriggerType)}
                 className="w-full rounded-md border border-border bg-muted px-2 py-1.5 text-sm text-foreground focus:border-primary focus:outline-none"
               >
                 {TRIGGER_OPTIONS.map((o) => (
@@ -810,7 +810,7 @@ function TriggerCard({
                 </label>
                 <TagSelect
                   value={(config.tag_id as string) ?? ""}
-                  onChange={(v) => onConfigChange({ ...config, tag_id: v })}
+                  onChange={(v: any) => onConfigChange({ ...config, tag_id: v })}
                 />
               </div>
             )}
@@ -818,7 +818,7 @@ function TriggerCard({
               <Input
                 placeholder="Cron expression or HH:mm"
                 value={(config.schedule as string) ?? ""}
-                onChange={(e) =>
+                onChange={(e: any) =>
                   onConfigChange({ ...config, schedule: e.target.value })
                 }
                 className="bg-muted text-foreground"
@@ -876,9 +876,9 @@ function KeywordMatchConfig({
         </label>
         <Input
           value={draft}
-          onChange={(e) => setDraft(e.target.value)}
+          onChange={(e: any) => setDraft(e.target.value)}
           onBlur={commit}
-          onKeyDown={(e) => {
+          onKeyDown={(e: any) => {
             if (e.key === "Enter") {
               e.preventDefault()
               commit()
@@ -894,7 +894,7 @@ function KeywordMatchConfig({
         </label>
         <select
           value={config?.match_type ?? "contains"}
-          onChange={(e) => onChange({ ...config, match_type: e.target.value as "exact" | "contains" })}
+          onChange={(e: any) => onChange({ ...config, match_type: e.target.value as "exact" | "contains" })}
           className="w-full rounded-md border border-border bg-muted px-2 py-1.5 text-sm text-foreground focus:outline-none"
         >
           <option value="contains">Contains</option>
@@ -1180,7 +1180,7 @@ function StepEditor({
         <FieldBlock label="Message text">
           <Textarea
             value={(cfg.text as string) ?? ""}
-            onChange={(e) => set({ text: e.target.value })}
+            onChange={(e: any) => set({ text: e.target.value })}
             placeholder="Hi! Thanks for reaching out…"
             className="min-h-24 bg-muted text-foreground"
           />
@@ -1200,7 +1200,7 @@ function StepEditor({
         <FieldBlock label="Tag">
           <TagSelect
             value={(cfg.tag_id as string) ?? ""}
-            onChange={(v) => set({ tag_id: v })}
+            onChange={(v: any) => set({ tag_id: v })}
           />
         </FieldBlock>
       )
@@ -1210,7 +1210,7 @@ function StepEditor({
           <FieldBlock label="Mode">
             <select
               value={(cfg.mode as string) ?? "round_robin"}
-              onChange={(e) => set({ mode: e.target.value })}
+              onChange={(e: any) => set({ mode: e.target.value })}
               className="w-full rounded-md border border-border bg-muted px-2 py-1.5 text-sm text-foreground"
             >
               <option value="round_robin">Round-robin</option>
@@ -1221,7 +1221,7 @@ function StepEditor({
             <FieldBlock label="Agent">
               <AgentSelect
                 value={(cfg.agent_id as string) ?? ""}
-                onChange={(v) => set({ agent_id: v })}
+                onChange={(v: any) => set({ agent_id: v })}
               />
             </FieldBlock>
           )}
@@ -1233,13 +1233,13 @@ function StepEditor({
           <FieldBlock label="Field">
             <ContactFieldSelect
               value={(cfg.field as string) ?? "name"}
-              onChange={(v) => set({ field: v })}
+              onChange={(v: any) => set({ field: v })}
             />
           </FieldBlock>
           <FieldBlock label="Value">
             <Input
               value={(cfg.value as string) ?? ""}
-              onChange={(e) => set({ value: e.target.value })}
+              onChange={(e: any) => set({ value: e.target.value })}
               placeholder="Text or {{ vars.x }} / {{ message.text }}"
               className="bg-muted text-foreground"
             />
@@ -1257,7 +1257,7 @@ function StepEditor({
           <FieldBlock label="Title">
             <Input
               value={(cfg.title as string) ?? ""}
-              onChange={(e) => set({ title: e.target.value })}
+              onChange={(e: any) => set({ title: e.target.value })}
               className="bg-muted text-foreground"
             />
           </FieldBlock>
@@ -1265,7 +1265,7 @@ function StepEditor({
             <Input
               type="number"
               value={(cfg.value as number) ?? 0}
-              onChange={(e) => set({ value: Number(e.target.value) })}
+              onChange={(e: any) => set({ value: Number(e.target.value) })}
               className="bg-muted text-foreground"
             />
           </FieldBlock>
@@ -1279,14 +1279,14 @@ function StepEditor({
               type="number"
               min={1}
               value={(cfg.amount as number) ?? 1}
-              onChange={(e) => set({ amount: Math.max(1, Number(e.target.value)) })}
+              onChange={(e: any) => set({ amount: Math.max(1, Number(e.target.value)) })}
               className="bg-muted text-foreground"
             />
           </FieldBlock>
           <FieldBlock label="Unit">
             <select
               value={(cfg.unit as string) ?? "hours"}
-              onChange={(e) => set({ unit: e.target.value })}
+              onChange={(e: any) => set({ unit: e.target.value })}
               className="w-full rounded-md border border-border bg-muted px-2 py-1.5 text-sm text-foreground"
             >
               <option value="minutes">Minutes</option>
@@ -1302,7 +1302,7 @@ function StepEditor({
           <FieldBlock label="Subject">
             <select
               value={(cfg.subject as string) ?? "tag_presence"}
-              onChange={(e) => set({ subject: e.target.value })}
+              onChange={(e: any) => set({ subject: e.target.value })}
               className="w-full rounded-md border border-border bg-muted px-2 py-1.5 text-sm text-foreground"
             >
               <option value="tag_presence">Tag presence</option>
@@ -1323,7 +1323,7 @@ function StepEditor({
                   : ""
               }
               value={(cfg.operand as string) ?? ""}
-              onChange={(e) => set({ operand: e.target.value })}
+              onChange={(e: any) => set({ operand: e.target.value })}
               className="bg-muted text-foreground"
             />
           </FieldBlock>
@@ -1331,7 +1331,7 @@ function StepEditor({
             <FieldBlock label="Value">
               <Input
                 value={(cfg.value as string) ?? ""}
-                onChange={(e) => set({ value: e.target.value })}
+                onChange={(e: any) => set({ value: e.target.value })}
                 className="bg-muted text-foreground"
               />
             </FieldBlock>
@@ -1344,14 +1344,14 @@ function StepEditor({
           <FieldBlock label="URL">
             <Input
               value={(cfg.url as string) ?? ""}
-              onChange={(e) => set({ url: e.target.value })}
+              onChange={(e: any) => set({ url: e.target.value })}
               className="bg-muted text-foreground"
             />
           </FieldBlock>
           <FieldBlock label="Body template (JSON)">
             <Textarea
               value={(cfg.body_template as string) ?? ""}
-              onChange={(e) => set({ body_template: e.target.value })}
+              onChange={(e: any) => set({ body_template: e.target.value })}
               className="min-h-20 bg-muted font-mono text-xs text-foreground"
             />
           </FieldBlock>

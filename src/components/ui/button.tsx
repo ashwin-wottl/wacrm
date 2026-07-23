@@ -58,9 +58,10 @@ function Button({
   return (
     <ButtonPrimitive
       data-slot="button"
-      // @ts-expect-error Base UI typing does not include className explicitly
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
+      {...({
+        className: cn(buttonVariants({ variant, size, className })),
+        ...props
+      } as any)}
     />
   )
 }

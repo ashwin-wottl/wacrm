@@ -257,7 +257,7 @@ export function Step3Personalize({
           <Input
             type="url"
             value={headerMediaUrl}
-            onChange={(e) => onHeaderMediaUrlChange(e.target.value)}
+            onChange={(e: any) => onHeaderMediaUrlChange(e.target.value)}
             placeholder={`https://example.com/header.${
               mediaHeaderType === 'image'
                 ? 'jpg'
@@ -321,7 +321,7 @@ export function Step3Personalize({
                     </label>
                     <Select
                       value={mapping.type}
-                      onValueChange={(val) =>
+                      onValueChange={(val: string) =>
                         updateVariable(key, {
                           type: val as VariableType,
                           value: '',
@@ -348,7 +348,7 @@ export function Step3Personalize({
                     {mapping.type === 'static' ? (
                       <Input
                         value={mapping.value}
-                        onChange={(e) =>
+                        onChange={(e: any) =>
                           updateVariable(key, { value: e.target.value })
                         }
                         placeholder="Enter value..."
@@ -357,7 +357,7 @@ export function Step3Personalize({
                     ) : mapping.type === 'field' ? (
                       <Select
                         value={mapping.value || undefined}
-                        onValueChange={(val) =>
+                        onValueChange={(val: string) =>
                           updateVariable(key, { value: val || '' })
                         }
                       >
@@ -375,7 +375,7 @@ export function Step3Personalize({
                     ) : (
                       <Select
                         value={mapping.value || undefined}
-                        onValueChange={(val) =>
+                        onValueChange={(val: string) =>
                           updateVariable(key, { value: val || '' })
                         }
                       >

@@ -414,7 +414,7 @@ export function MembersTab() {
                     {canManageMembers && !isOwnerRow && !isSelf ? (
                       <Select
                         value={member.role}
-                        onValueChange={(v) =>
+                        onValueChange={(v: any) =>
                           // Base UI Select can emit null on clear. We
                           // don't expose a clear affordance, so the
                           // guard is defensive — but the typed

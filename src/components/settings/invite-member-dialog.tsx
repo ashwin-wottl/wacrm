@@ -212,7 +212,7 @@ export function InviteMemberDialog({
                   readOnly
                   value={result.url}
                   className="bg-muted border-border text-foreground font-mono text-xs"
-                  onFocus={(e) => e.currentTarget.select()}
+                  onFocus={(e: any) => e.currentTarget.select()}
                 />
                 <Button
                   type="button"
@@ -282,7 +282,7 @@ export function InviteMemberDialog({
                 <Label className="text-muted-foreground">Role</Label>
                 <Select
                   value={role}
-                  onValueChange={(v) => v && setRole(v as InviteRole)}
+                  onValueChange={(v: any) => v && setRole(v as InviteRole)}
                 >
                   <SelectTrigger className="w-full bg-muted border-border text-foreground">
                     <SelectValue />
@@ -302,7 +302,7 @@ export function InviteMemberDialog({
                 <Label className="text-muted-foreground">Link valid for</Label>
                 <Select
                   value={expiry}
-                  onValueChange={(v) => v && setExpiry(v)}
+                  onValueChange={(v: any) => v && setExpiry(v)}
                 >
                   <SelectTrigger className="w-full bg-muted border-border text-foreground">
                     <SelectValue />
@@ -325,7 +325,7 @@ export function InviteMemberDialog({
                 <Input
                   placeholder="e.g. Sara — support team"
                   value={label}
-                  onChange={(e) => setLabel(e.target.value)}
+                  onChange={(e: any) => setLabel(e.target.value)}
                   maxLength={MAX_LABEL_LEN}
                   className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                 />

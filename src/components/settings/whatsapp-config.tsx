@@ -65,6 +65,8 @@ export function WhatsAppConfig() {
   const [wabaId, setWabaId] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [verifyToken, setVerifyToken] = useState('');
+  const [metaAppId, setMetaAppId] = useState('');
+  const [metaAppSecret, setMetaAppSecret] = useState('');
   const [pin, setPin] = useState('');
   const [tokenEdited, setTokenEdited] = useState(false);
 
@@ -117,6 +119,8 @@ export function WhatsAppConfig() {
         setWabaId(data.waba_id || '');
         setAccessToken(MASKED_TOKEN);
         setVerifyToken('');
+        setMetaAppId(data.meta_app_id || '');
+        setMetaAppSecret(data.meta_app_secret ? MASKED_TOKEN : '');
         setPin('');
         setTokenEdited(false);
       } else {
@@ -125,6 +129,8 @@ export function WhatsAppConfig() {
         setWabaId('');
         setAccessToken('');
         setVerifyToken('');
+        setMetaAppId('');
+        setMetaAppSecret('');
         setPin('');
         setTokenEdited(false);
       }
@@ -201,11 +207,16 @@ export function WhatsAppConfig() {
         phone_number_id: phoneNumberId.trim(),
         waba_id: wabaId.trim() || null,
         verify_token: verifyToken.trim() || null,
+        meta_app_id: metaAppId.trim() || null,
         // Optional — only sent when the user filled it in. The server
         // requires it on first save or when changing numbers; for a
         // simple token rotation, leaving it blank skips re-register.
         pin: pin.trim() || null,
       };
+
+      if (metaAppSecret !== MASKED_TOKEN && metaAppSecret.trim()) {
+        payload.meta_app_secret = metaAppSecret.trim();
+      }
 
       if (tokenEdited && accessToken !== MASKED_TOKEN && accessToken.trim()) {
         payload.access_token = accessToken.trim();
@@ -352,6 +363,8 @@ export function WhatsAppConfig() {
       setWabaId('');
       setAccessToken('');
       setVerifyToken('');
+      setMetaAppId('');
+      setMetaAppSecret('');
       setTokenEdited(false);
       setConnectionStatus('disconnected');
       setResetReason(null);
@@ -618,6 +631,34 @@ export function WhatsAppConfig() {
                   Token is hidden for security. Re-enter it to update configuration.
                 </p>
               )}
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-muted-foreground">Meta App ID</Label>
+              <Input
+                placeholder="e.g. 2006625160160110"
+                value={metaAppId}
+                onChange={(e: any) => setMetaAppId(e.target.value)}
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-muted-foreground">Meta App Secret</Label>
+              <div className="relative">
+                <Input
+                  type={showToken ? 'text' : 'password'}
+                  placeholder="Enter your Meta App Secret"
+                  value={metaAppSecret}
+                  onChange={(e: any) => setMetaAppSecret(e.target.value)}
+                  onFocus={() => {
+                    if (metaAppSecret === MASKED_TOKEN) {
+                      setMetaAppSecret('');
+                    }
+                  }}
+                  className="bg-muted border-border text-foreground placeholder:text-muted-foreground pr-10"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">

@@ -21,15 +21,16 @@ const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png']
 export async function ensureImageHeaderHandle(
   payload: TemplatePayload,
   accessToken: string,
+  appId?: string | null,
 ): Promise<void> {
   if (payload.header_type !== 'image') return
   if (payload.header_handle) return // already have one
   if (!payload.header_media_url) return // validator already requires url-or-handle
 
-  const appId = process.env.META_APP_ID
-  if (!appId) {
+  const metaAppId = appId || process.env.META_APP_ID
+  if (!metaAppId) {
     throw new Error(
-      'Image-header templates need META_APP_ID set (used for Meta’s Resumable Upload). Add it to your environment, or remove the image header.',
+      'Image-header templates need a Meta App ID (either in database or META_APP_ID env var) for Meta’s Resumable Upload. Add it to your config, or remove the image header.',
     )
   }
 
@@ -64,7 +65,7 @@ export async function ensureImageHeaderHandle(
   const fileName = mimeType === 'image/png' ? 'header.png' : 'header.jpg'
 
   const { handle } = await uploadResumableMedia({
-    appId,
+    appId: metaAppId,
     accessToken,
     fileName,
     mimeType,

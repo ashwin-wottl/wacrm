@@ -26,6 +26,7 @@ import { extractVariableIndices } from "@/lib/whatsapp/template-validators";
 export interface TemplateSendValues {
   body: string[];
   headerText?: string;
+  headerMediaUrl?: string;
   buttonParams?: Record<number, string>;
 }
 
@@ -83,6 +84,7 @@ export function TemplatePicker({
   const [selected, setSelected] = useState<MessageTemplate | null>(null);
   const [params, setParams] = useState<string[]>([]);
   const [headerText, setHeaderText] = useState<string>("");
+  const [headerMediaUrl, setHeaderMediaUrl] = useState<string>("");
   const [buttonParams, setButtonParams] = useState<Record<number, string>>({});
 
   useEffect(() => {
@@ -133,6 +135,7 @@ export function TemplatePicker({
     setSelected(null);
     setParams([]);
     setHeaderText("");
+    setHeaderMediaUrl("");
     setButtonParams({});
   }
 
@@ -155,6 +158,7 @@ export function TemplatePicker({
     setSelected(template);
     setParams(new Array(slots.bodyVars.length).fill(""));
     setHeaderText("");
+    setHeaderMediaUrl("");
     setButtonParams({});
   }
 
@@ -162,6 +166,7 @@ export function TemplatePicker({
     if (!selected) return;
     const values: TemplateSendValues = { body: params };
     if (headerText.trim()) values.headerText = headerText.trim();
+    if (headerMediaUrl.trim()) values.headerMediaUrl = headerMediaUrl.trim();
     if (Object.keys(buttonParams).length > 0) {
       values.buttonParams = Object.fromEntries(
         Object.entries(buttonParams).map(([k, v]) => [Number(k), v.trim()]),
@@ -175,11 +180,18 @@ export function TemplatePicker({
     () => (selected ? collectVariableSlots(selected) : null),
     [selected],
   );
+
+  const requiresMediaUrl =
+    selected?.header_type === "image" ||
+    selected?.header_type === "video" ||
+    selected?.header_type === "document";
+
   const canConfirm =
     !!selected &&
     !!slots &&
     slots.bodyVars.every((_, i) => (params[i] ?? "").trim().length > 0) &&
     (slots.headerVarCount === 0 || headerText.trim().length > 0) &&
+    (!requiresMediaUrl || headerMediaUrl.trim().length > 0) &&
     slots.urlButtonSlots.every(
       (s) => (buttonParams[s.index] ?? "").trim().length > 0,
     );
@@ -268,6 +280,19 @@ export function TemplatePicker({
                   value={headerText}
                   onChange={(e: any) => setHeaderText(e.target.value)}
                   placeholder="Value for the header variable"
+                  className="border-border bg-muted text-foreground placeholder:text-muted-foreground"
+                />
+              </div>
+            )}
+            {requiresMediaUrl && (
+              <div className="space-y-1">
+                <Label className="text-xs text-popover-foreground">
+                  Header Media URL
+                </Label>
+                <Input
+                  value={headerMediaUrl}
+                  onChange={(e: any) => setHeaderMediaUrl(e.target.value)}
+                  placeholder={`URL for the ${selected.header_type}`}
                   className="border-border bg-muted text-foreground placeholder:text-muted-foreground"
                 />
               </div>

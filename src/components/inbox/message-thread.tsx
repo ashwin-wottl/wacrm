@@ -586,6 +586,7 @@ export function MessageThread({
       values: {
         body: string[];
         headerText?: string;
+        headerMediaUrl?: string;
         buttonParams?: Record<number, string>;
       },
     ) => {
@@ -622,6 +623,7 @@ export function MessageThread({
             template_message_params: {
               body: values.body,
               headerText: values.headerText,
+              headerMediaUrl: values.headerMediaUrl,
               buttonParams: values.buttonParams,
             },
             template_params: values.body,

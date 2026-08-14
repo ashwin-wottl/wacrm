@@ -80,7 +80,8 @@ function buildHeaderComponent(
     // TEXT header with {{1}} → need a value. Static text headers
     // (no variables) just ride along inside the template itself; no
     // header component required on send.
-    const varCount = extractVariableIndices(template.header_content ?? '').length;
+    const headerMatches = (template.header_content ?? '').matchAll(/\{\{([a-zA-Z0-9_]+)\}\}/g);
+    const varCount = [...new Set(Array.from(headerMatches).map(m => m[1]))].length;
     if (varCount === 0) return null;
     const value = params.headerText;
     if (!value || !value.trim()) {
@@ -127,7 +128,9 @@ function buildBodyComponent(
   template: MessageTemplate,
   params: SendTimeParams,
 ): MetaSendComponent | null {
-  const varCount = extractVariableIndices(template.body_text).length;
+  const bodyMatches = template.body_text.matchAll(/\{\{([a-zA-Z0-9_]+)\}\}/g);
+  const varCount = [...new Set(Array.from(bodyMatches).map(m => m[1]))].length;
+
   const body = params.body ?? [];
   if (varCount === 0 && body.length === 0) return null;
   if (body.length < varCount) {

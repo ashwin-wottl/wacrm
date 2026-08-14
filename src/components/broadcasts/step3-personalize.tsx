@@ -128,7 +128,7 @@ export function Step3Personalize({
   }, []);
 
   const placeholders = useMemo(() => {
-    const matches = template.body_text.match(/\{\{(\d+)\}\}/g);
+    const matches = template.body_text.match(/\{\{([a-zA-Z0-9_]+)\}\}/g);
     if (!matches) return [];
     return [...new Set(matches)].sort();
   }, [template.body_text]);

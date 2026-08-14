@@ -36,11 +36,12 @@ interface TemplatePickerProps {
   onSelect: (template: MessageTemplate, values: TemplateSendValues) => void;
 }
 
-function renderBodyPreview(body: string, params: string[]): string {
-  return body.replace(/\{\{(\d+)\}\}/g, (_, raw) => {
-    const idx = Number(raw) - 1;
+function renderBodyPreview(body: string, params: string[], bodyVars: string[]): string {
+  return body.replace(/\{\{([a-zA-Z0-9_]+)\}\}/g, (match, raw) => {
+    const idx = bodyVars.indexOf(raw);
+    if (idx === -1) return match;
     const value = params[idx];
-    return value && value.trim().length > 0 ? value : `{{${raw}}}`;
+    return value && value.trim().length > 0 ? value : match;
   });
 }
 
@@ -56,11 +57,12 @@ interface UrlButtonSlot {
  * send-message path doesn't 400 on missing parameters.
  */
 function collectVariableSlots(template: MessageTemplate): {
-  bodyVars: number[];
+  bodyVars: string[];
   headerVarCount: number;
   urlButtonSlots: UrlButtonSlot[];
 } {
-  const bodyVars = extractVariableIndices(template.body_text);
+  const bodyMatches = template.body_text.matchAll(/\{\{([a-zA-Z0-9_]+)\}\}/g);
+  const bodyVars = [...new Set(Array.from(bodyMatches).map(m => m[1]))];
   const headerVarCount =
     template.header_type === "text" && template.header_content
       ? extractVariableIndices(template.header_content).length
@@ -263,7 +265,7 @@ export function TemplatePicker({
             <div className="rounded-md border border-border bg-background/50 p-3">
               <p className="mb-1 text-xs text-muted-foreground">Preview</p>
               <p className="whitespace-pre-wrap text-sm text-popover-foreground">
-                {renderBodyPreview(selected.body_text, params)}
+                {renderBodyPreview(selected.body_text, params, slots?.bodyVars || [])}
               </p>
               {selected.footer_text && (
                 <p className="mt-2 text-xs italic text-muted-foreground">

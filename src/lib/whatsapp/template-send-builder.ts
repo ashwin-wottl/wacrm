@@ -8,7 +8,7 @@
  * `components` (where you fill in variable values and supply the
  * actual media link or button URL suffix for THIS specific delivery).
  *
- * Auto-fills as much as possible from the template row so callers
+ * Auto-fills as much as possible from the template row so callersm
  * only need to supply values for the variable-bearing fields:
  *
  *   - Static IMAGE/VIDEO/DOCUMENT headers ride along automatically
@@ -55,11 +55,11 @@ export type MetaSendComponent =
   | { type: 'header'; parameters: MetaSendParameter[] }
   | { type: 'body'; parameters: MetaSendParameter[] }
   | {
-      type: 'button';
-      sub_type: 'url' | 'quick_reply' | 'copy_code';
-      index: string;
-      parameters: MetaSendParameter[];
-    };
+    type: 'button';
+    sub_type: 'url' | 'quick_reply' | 'copy_code';
+    index: string;
+    parameters: MetaSendParameter[];
+  };
 
 type MetaSendParameter =
   | { type: 'text'; text: string }

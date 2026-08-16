@@ -148,10 +148,17 @@ export function TemplatePicker({
 
   function pickTemplate(template: MessageTemplate) {
     const slots = collectVariableSlots(template);
+    const requiresMediaUrl =
+      template.header_type === "image" ||
+      template.header_type === "video" ||
+      template.header_type === "document";
+
     const noInputsNeeded =
       slots.bodyVars.length === 0 &&
       slots.headerVarCount === 0 &&
-      slots.urlButtonSlots.length === 0;
+      slots.urlButtonSlots.length === 0 &&
+      !requiresMediaUrl;
+
     if (noInputsNeeded) {
       onSelect(template, { body: [] });
       handleOpenChange(false);
@@ -160,7 +167,7 @@ export function TemplatePicker({
     setSelected(template);
     setParams(new Array(slots.bodyVars.length).fill(""));
     setHeaderText("");
-    setHeaderMediaUrl("");
+    setHeaderMediaUrl(template.header_media_url || "");
     setButtonParams({});
   }
 
